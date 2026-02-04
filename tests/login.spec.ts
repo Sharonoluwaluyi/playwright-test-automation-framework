@@ -5,7 +5,9 @@ test('User can log in with valid credentials', async ({ page }) => {
   const loginPage = new LoginPage(page);
 
   await loginPage.navigate();
-  await loginPage.login('testuser', 'password');
+  await loginPage.login('tomsmith', 'SuperSecretPassword!');
 
-  await expect(page).toHaveURL(/dashboard/);
+  await expect(loginPage.getSuccessMessage()).toContainText(
+    'You logged into a secure area!'
+  );
 });
